@@ -356,7 +356,7 @@ def parse_new_exercise_and_logs(message, day_id):
     try:
         common_reps = int(parts[1])
         if common_reps <= 0:
-            raise ValueError("Повторы должны быть > 0")
+            raise ValueError("Подходы должны быть > 0")
 
         weights_list_str = parts[2:]
         if not weights_list_str:
@@ -524,7 +524,7 @@ def handle_log_existing_exercise_new(call):
     msg = bot.edit_message_text(chat_id=call.message.chat.id,
                                 message_id=call.message.message_id,
                                 text=f"Запись для: **{ex_name}**.\n\n"
-                                     f"Введи |повторы| и |веса| в одну строку:\n"
+                                     f"Введи |подходы| и |веса| в одну строку:\n"
                                      "**Пример: `3 80 85 90`\n",
                                 parse_mode="Markdown")
     
@@ -537,7 +537,7 @@ def parse_logs_for_existing_exercise(message, exercise_id):
     # first check
     if not parts or len(parts) < 2:
         msg = bot.reply_to(message, "🚫 Ошибка формата. \n"
-                                    "Нужен минимум: `Повторы Вес`\n"
+                                    "Нужен минимум: `подходы Вес`\n"
                                     "Попробуй еще раз:")
         bot.register_next_step_handler(msg, parse_logs_for_existing_exercise, exercise_id)
         return
@@ -547,7 +547,7 @@ def parse_logs_for_existing_exercise(message, exercise_id):
         # second check
         common_reps = int(parts[0])
         if common_reps <= 0:
-            raise ValueError("Повторы должны быть > 0")
+            raise ValueError("подходы должны быть > 0")
 
         # third check
         weights_list_str = parts[1:]
