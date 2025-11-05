@@ -86,7 +86,7 @@ def handle_add_day(message):
     msg = bot.send_message(message.chat.id, 
                            "Введи названия нового дня тренировок;")
     
-#pass to the save_day function(IMPORTANT)
+# pass to the save_day function(IMPORTANT)
     bot.register_next_step_handler(msg, save_day)
 
 def save_day(message):
@@ -334,7 +334,7 @@ def handle_add_new_exercise(call):
     bot.answer_callback_query(call.id)
     msg = bot.edit_message_text(chat_id=call.message.chat.id,
                                 message_id=call.message.message_id,
-                                text="Введи |название|, |повторы| и |веса| в одну строку:\n"
+                                text="Введи |название|, |подходы| и |веса| в одну строку:\n"
                                      "Пример: `Жим 2 20 15`\n")
     
     bot.register_next_step_handler(msg, parse_new_exercise_and_logs, day_id)
